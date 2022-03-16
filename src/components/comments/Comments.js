@@ -1,6 +1,6 @@
 import React from "react";
-import AddComment from "./AddComment";
-import Comment from "./Comment";
+import AddComment from "./comment/AddComment";
+import Comment from "./comment/Comment";
 
 import styles from './Comments.module.css'
 
