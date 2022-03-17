@@ -3,12 +3,14 @@ import React from "react";
 import minus from '../../../../asset/images/icon-minus.svg'
 import plus from '../../../../asset/images/icon-plus.svg'
 
-const Aside = () => (
+const Aside = ({score}) => (
   <aside>
     <button>
     <img src={plus} alt='+' />
     </button>
-    <p>2</p>
+    <p>
+      {score}
+    </p>
     <button>
         <img src={minus} alt='-' />
     </button>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import styles from "./AddComment.module.css";
-import author from "../../../asset/images/avatars/image-juliusomo.png";
+// import author from "../../../asset/images/avatars/image-juliusomo.png";
+import Avatar from "./avatar/Avatar";
 
-const AddComment = () => {
+const AddComment = ({currentUser}) => {
   const [addComment, setAddComment] = useState("");
 
   const onChangeHandler = (e) => setAddComment(e.target.value)
@@ -27,7 +28,7 @@ const AddComment = () => {
             placeholder="Add a comment..."
             value={addComment}
           />
-          <img src={author} alt="author" />
+          <Avatar img={currentUser.image.png} user={currentUser.username} />
           <button type="submit">Send</button>
         </div>
       </form>
