@@ -12,9 +12,9 @@ form .formContainer img {
     width: 3rem;
     transform: translateY(3.6rem);
 }
-.AddComment form input[type='text'] {
+.AddComment form textarea {
     padding: 1rem;
-    border-radius: 7px;
+    border-radius: 4px;
     display: block;
     width: 100%;
     border: 1px solid #eaecf1;

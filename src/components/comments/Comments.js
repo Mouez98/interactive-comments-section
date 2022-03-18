@@ -4,6 +4,7 @@ import Comment from "./comment/Comment";
 import { data } from "../../data";
 
 import styles from "./Comments.module.css";
+import Replies from "./replies/Replies";
 
 const Comments = () => {
   const { currentUser, comments } = data;
@@ -16,6 +17,7 @@ const Comments = () => {
         ))}
 
       <AddComment currentUser={currentUser} />
+      <Replies />
     </main>
   );
 };

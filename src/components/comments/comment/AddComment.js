@@ -21,7 +21,7 @@ const AddComment = ({currentUser}) => {
     <article className={styles.AddComment}>
       <form onSubmit={onSubmitHandler}>
         <div className={styles.formContainer}>
-          <input
+          <textarea
             onChange={onChangeHandler}
             type="text"
             id="addComment"
