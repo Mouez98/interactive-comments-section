@@ -6,11 +6,12 @@ import btnDelete from "../../../../asset/images/icon-delete.svg";
 import styles from "../Comment.module.css";
 
 const BtnsContainer = ({ user, currentUser }) => {
+  console.log(user, 'btns')
   return (
     <div className={styles.btnsContainer}>
       {user.username === currentUser.username && (
         <>
-          <button style={{ color: "#f00" }}>
+          <button style={{ color: "hsl(358, 79%, 66%)" }}>
             <img src={btnDelete} alt="delete" /> delete
           </button>
           <button>
