@@ -1,10 +1,15 @@
 import './App.css';
-import Comments from './components/comments/Comments';
+import Comments from './pages/Comments';
+import  {Route, Routes} from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-       <Comments />
+       <Routes>
+         <Route path='/' element={<p>Welcome page</p>} />
+         <Route path='/comments' element={<Comments />} />
+         <Route path='/comments/:commentId' element={<Comment />} />
+       </Routes>
     </div>
   );
 }
