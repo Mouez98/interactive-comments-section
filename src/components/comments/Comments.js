@@ -17,7 +17,7 @@ const Comments = () => {
         ))}
 
       <AddComment currentUser={currentUser} />
-      <Replies />
+      
     </main>
   );
 };

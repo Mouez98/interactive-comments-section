@@ -1,0 +1,63 @@
+.modal {
+  background-color: hsl(0deg 0% 26% / 35%);
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+
+.overlay {
+    background-color: rgb(255, 255, 255);
+    font-family: inherit;
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 91%;
+    z-index: 10;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.overlay h2 {
+    margin: 1rem 0;
+    color: hsl(212, 24%, 26%);
+}
+
+.overlay p {
+    line-height: 1.6rem;
+    color: hsl(211, 10%, 45%);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.btnContainer button {
+  font-family: inherit;
+  padding: 1rem 0;
+  width: 50%;
+  border-radius: 4px;
+  text-transform: uppercase;
+  border: none;
+  color: #fff;
+}
+.btnContainer .danger {
+    background-color: hsl(358, 79%, 66%);
+}
+.btnContainer .success {
+   background-color: hsl(211, 10%, 45%);
+}
+
+@media (min-width: 376px) {
+    .overlay {
+        width: 33rem;
+    }
+}
