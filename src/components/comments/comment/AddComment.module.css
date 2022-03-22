@@ -31,3 +31,10 @@ button[type='submit'] {
     text-transform: uppercase;
     margin-left: auto;
 }
+
+@media (min-width: 650px) {
+    section + .AddComment {
+        width: 65rem;
+        margin: 1rem auto;
+    }
+}
