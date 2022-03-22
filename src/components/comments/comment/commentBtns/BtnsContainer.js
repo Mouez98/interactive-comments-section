@@ -6,7 +6,7 @@ import btnDelete from "../../../../asset/images/icon-delete.svg";
 import styles from "../Comment.module.css";
 
 const BtnsContainer = ({ user, currentUser }) => {
-  console.log(user, 'btns')
+  
   return (
     <div className={styles.btnsContainer}>
       {user.username === currentUser.username && (

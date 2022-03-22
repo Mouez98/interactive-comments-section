@@ -5,6 +5,7 @@
   border-radius: 1rem;
   margin: 1rem;
   font-size: 1.5rem;
+  
 }
 
 article nav{
@@ -46,6 +47,7 @@ article nav button{
     font-weight: bold;
     text-transform: capitalize;
     margin: 0 .5rem;
+    cursor: pointer;
 }
 article .text{
     text-align: left;
@@ -56,14 +58,16 @@ article .text{
 }
 article .text span{
    color: #5357b6;
+   cursor: pointer;
    
 }
 aside{
     width: 10rem;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 1rem 1rem 0;
     background-color: hsl(223, 19%, 93%);
-    justify-content: space-between;
     padding: 1rem;
     border-radius: 1rem;
     color: #5357b6;
@@ -75,6 +79,7 @@ aside{
     background-color: transparent;
     border: none;
     color: #9b9be2;
+    cursor: pointer;
 }
 
 /* Replies */
