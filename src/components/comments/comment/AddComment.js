@@ -1,20 +1,46 @@
 import React, { useState } from "react";
 
 import styles from "./AddComment.module.css";
-// import author from "../../../asset/images/avatars/image-juliusomo.png";
+import { useDispatch } from "react-redux";
+import { commentsActions } from "../../../store/store";
 import Avatar from "./avatar/Avatar";
 
-const AddComment = ({currentUser}) => {
-  const [addComment, setAddComment] = useState("");
+const AddComment = ({ image, username, type, id, user }) => {
+  const [comment, setComment] = useState("");
+  
+  const dispatch = useDispatch()
 
-  const onChangeHandler = (e) => setAddComment(e.target.value)
+  const onChangeHandler = (e) => setComment(e.target.value)
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler =  (e) => {
     e.preventDefault();
-    if (!addComment || addComment.trim.length === "") {
+    if (!comment || comment.trim.length === "") {
       return;
     }
-    console.log(addComment);
+    type === 'comment' &&
+    dispatch(commentsActions.addComment({
+      id: new Date().getTime(),
+      content: comment ,
+      createdAt: new Date().getDate(),
+      score: 0,
+      user: {
+        image,
+        username
+      },
+      replies: []
+    }))
+
+    type === 'reply' && dispatch(commentsActions.addReply({
+       id: id,
+       content: comment,
+       score: 0,
+       replyingTo: user.username,
+       user:{
+         image,
+         username
+       }
+    }))
+    setComment('')
   };
 
   return (
@@ -26,14 +52,14 @@ const AddComment = ({currentUser}) => {
             type="text"
             id="addComment"
             placeholder="Add a comment..."
-            value={addComment}
+            value={comment}
           />
-          <Avatar img={currentUser.image.png} user={currentUser.username} />
+          <Avatar img={image} user={username} />
           <button type="submit">Send</button>
         </div>
       </form>
     </article>
   );
-};
+}
 
-export default AddComment;
+export default React.memo(AddComment);

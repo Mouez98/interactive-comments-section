@@ -13,7 +13,7 @@ const Comments = ({ currentUser, comments }) => {
           <Comment key={comment.id} {...comment} currentUser={currentUser} />
         ))}
 
-      <AddComment currentUser={currentUser} />
+      <AddComment {...currentUser} type='comment' />
       
     </main>
   );

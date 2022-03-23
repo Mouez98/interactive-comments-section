@@ -5,11 +5,23 @@ import TextContent from "../comment/textContent/TextContent";
 import Aside from "../comment/aside/Aside";
 import styles from "../comment/Comment.module.css";
 
-const Reply = ({ user, content, score, replyingTo, createdAt, currentUser }) => {
-
+const Reply = ({
+  user,
+  content,
+  score,
+  replyingTo,
+  createdAt,
+  currentUser,
+  commentId,
+}) => {
   return (
     <article className={styles.reply}>
-      <Nav currentUser={currentUser} user={user} createdAt={createdAt} />
+      <Nav
+        currentUser={currentUser}
+        user={user}
+        createdAt={createdAt}
+        commentId={commentId}
+      />
       <TextContent content={content} replyingTo={replyingTo} />
       <Aside score={score} />
     </article>

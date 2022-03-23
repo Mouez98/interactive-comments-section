@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       {/* <Comments /> */}
        <Routes>
-         <Route path='/' element={<p>Welcome</p>} />
+         <Route path='/' element={<Comments />} />
          <Route path='*' element={<p>Not found</p>} />
          <Route path='comments' element={<Comments />} >
            <Route path=':commentId' element={<p>Comment</p>} >
