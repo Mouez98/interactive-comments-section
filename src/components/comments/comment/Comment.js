@@ -15,7 +15,7 @@ const Comment = ({ user, content, createdAt, score, currentUser, replies, id, sh
           <Nav currentUser={currentUser} user={user} createdAt={createdAt} commentId={id} />
           <TextContent content={content} />
         </article>
-        <Aside score={score} />
+        <Aside score={score} curUserId={currentUser.id} authorId={id}/>
       </section>
       {showReplies && (
         <Replies showReplies={showReplies} replies={replies} currentUser={currentUser}  id={id} user={user}/>

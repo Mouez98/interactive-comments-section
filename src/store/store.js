@@ -6,10 +6,10 @@ import maxblagun from "../asset/images/avatars/image-maxblagun.png";
 import ramsesmiron from "../asset/images/avatars/image-ramsesmiron.png";
 
 const initialState = {
-  
   currentUser: {
     image: currentUserImage,
     username: "juliusomo",
+    id: "u1",
   },
   comments: [
     {
@@ -23,7 +23,10 @@ const initialState = {
         image: amyrobson,
         username: "amyrobson",
       },
-      replies: [],
+      replies: {
+        comments: [],
+        likes: [],
+      },
     },
     {
       id: 2,
@@ -36,32 +39,35 @@ const initialState = {
         image: maxblagun,
         username: "maxblagun",
       },
-      replies: [
-        {
-          id: 3,
-          content:
-            "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-          createdAt: "1 week ago",
-          score: 4,
-          replyingTo: "maxblagun",
-          user: {
-            image: ramsesmiron,
-            username: "ramsesmiron",
+      replies: {
+        comments: [
+          {
+            id: 3,
+            content:
+              "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+            createdAt: "1 week ago",
+            score: 4,
+            replyingTo: "maxblagun",
+            user: {
+              image: ramsesmiron,
+              username: "ramsesmiron",
+            },
           },
-        },
-        {
-          id: 4,
-          content:
-            "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-          createdAt: "2 days ago",
-          score: 2,
-          replyingTo: "ramsesmiron",
-          user: {
-            image: currentUserImage,
-            username: "juliusomo",
+          {
+            id: 4,
+            content:
+              "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+            createdAt: "2 days ago",
+            score: 2,
+            replyingTo: "ramsesmiron",
+            user: {
+              image: currentUserImage,
+              username: "juliusomo",
+            },
           },
-        },
-      ],
+        ],
+        likes: [],
+      },
     },
   ],
 };
@@ -74,21 +80,42 @@ const commentsSlice = createSlice({
       state.comments = [...state.comments, action.payload];
     },
     addReply: (state, action) => {
-      const commentId = state.comments.findIndex(
+      const commentIndex = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );
-      const comment = state.comments[commentId];
-      comment.replies.push(action.payload);
+      const comment = state.comments[commentIndex];
+      comment.replies.comments.push(action.payload);
     },
-    showReplies : (state, action) => {
+    showReplies: (state, action) => {
       const commentIndex = state.comments.findIndex(
         (comment) => comment.id === action.payload
       );
-      let comment = state.comments[commentIndex]
-      comment.showReplies = !comment.showReplies
-      
-      console.log(current(comment))
-    }
+      let comment = state.comments[commentIndex];
+      comment.showReplies = !comment.showReplies;
+    },
+    addScore: (state, action) => {
+      const { curUserId, authorId, type } = action.payload;
+      const commentIndex = state.comments.findIndex(
+        (comment) => comment.id === authorId
+      );
+
+      let comment = state.comments[commentIndex];
+      let score = comment.score;
+      let likes = comment.replies.likes;
+
+      const likeIndex = likes.findIndex((id) => id === curUserId);
+      console.log(likeIndex);
+
+      if (!likes.includes(curUserId) && type === "plus") {
+        likes.push(curUserId);
+        score = ++comment.score;
+      }
+
+      if (likes.includes(curUserId) && type === "minus") {
+        comment.score = comment.score - 1;
+        likes.splice(likeIndex, 1);
+      }
+    },
   },
 });
 

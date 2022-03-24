@@ -1,20 +1,33 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
+import { commentsActions } from "../../../../store/store";
 import minus from '../../../../asset/images/icon-minus.svg'
 import plus from '../../../../asset/images/icon-plus.svg'
 
-const Aside = ({score}) => (
+const Aside = ({score, curUserId, authorId}) => {
+  const dispatch = useDispatch();
+
+  const scoreHandler = (type) => {
+    console.log(type, curUserId, authorId)
+     dispatch(commentsActions.addScore({
+       curUserId,
+       authorId,
+       type
+     }))
+  }
+  return(
   <aside>
-    <button>
+    <button onClick={()=> scoreHandler('plus')}>
     <img src={plus} alt='+' />
     </button>
     <p>
       {score}
     </p>
-    <button>
+    <button onClick={()=> scoreHandler('minus')}>
         <img src={minus} alt='-' />
     </button>
   </aside>
-);
+)};
 
 export default Aside;
