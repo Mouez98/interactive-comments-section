@@ -9,7 +9,6 @@ const Aside = ({score, curUserId, authorId}) => {
   const dispatch = useDispatch();
 
   const scoreHandler = (type) => {
-    console.log(type, curUserId, authorId)
      dispatch(commentsActions.addScore({
        curUserId,
        authorId,

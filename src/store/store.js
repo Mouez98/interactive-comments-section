@@ -25,7 +25,7 @@ const initialState = {
       },
       replies: {
         comments: [],
-        likes: [],
+        votes: [],
       },
     },
     {
@@ -52,6 +52,7 @@ const initialState = {
               image: ramsesmiron,
               username: "ramsesmiron",
             },
+            votes : []
           },
           {
             id: 4,
@@ -64,9 +65,10 @@ const initialState = {
               image: currentUserImage,
               username: "juliusomo",
             },
+            votes: []
           },
         ],
-        likes: [],
+        votes: [],
       },
     },
   ],
@@ -101,19 +103,18 @@ const commentsSlice = createSlice({
 
       let comment = state.comments[commentIndex];
       let score = comment.score;
-      let likes = comment.replies.likes;
+      let votes = comment.replies.votes;
 
-      const likeIndex = likes.findIndex((id) => id === curUserId);
-      console.log(likeIndex);
+      const likeIndex = votes.findIndex((id) => id === curUserId);
 
-      if (!likes.includes(curUserId) && type === "plus") {
-        likes.push(curUserId);
+      if (!votes.includes(curUserId) && type === "plus") {
+        votes.push(curUserId);
         score = ++comment.score;
       }
 
-      if (likes.includes(curUserId) && type === "minus") {
+      if (votes.includes(curUserId) && type === "minus") {
         comment.score = comment.score - 1;
-        likes.splice(likeIndex, 1);
+        votes.splice(likeIndex, 1);
       }
     },
   },

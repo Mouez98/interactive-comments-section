@@ -13,6 +13,7 @@ const Reply = ({
   createdAt,
   currentUser,
   commentId,
+  id
 }) => {
   return (
     <article className={styles.reply}>
@@ -23,7 +24,7 @@ const Reply = ({
         commentId={commentId}
       />
       <TextContent content={content} replyingTo={replyingTo} />
-      <Aside score={score} />
+      <Aside score={score}  curUserId={currentUser.id} authorId={id}/>
     </article>
   );
 };
