@@ -47,6 +47,10 @@ article nav button{
     text-transform: capitalize;
     margin: 0 .5rem;
     cursor: pointer;
+    transition: all .3s ease-out;
+}
+nav button:hover {
+    opacity: .5;
 }
 article .text{
     text-align: left;
@@ -80,6 +84,15 @@ aside{
     color: #9b9be2;
     cursor: pointer;
 }
+aside button svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+
+aside button svg:hover path {
+   fill: #5357b6
+}
 
 /* Replies */
 .Replies  {
@@ -105,20 +118,71 @@ aside{
     .Comment {
         width: 65rem;
         margin: 1rem auto;
+        display: flex;
+        padding: 2rem;
+    }
+    
+    .Comment article {
+        order: 2;
+    }
+
+    .Comment aside {
+        width: 7rem;
+        display: flex;
+        flex-direction: column;
+        order: 1
+     }
+
+    article nav {
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .btnsContainer {
+        position: unset;
+       
     }
 
     .Replies {
         margin: 1rem auto;
-        width: 58rem;    
+        width: 58rem; 
+           
+    }
+    
+    .reply {
+        display: grid;
+        grid-template-columns: 7rem 1fr;
+        grid-template-areas:
+            'aside nav'
+            'aside text';
+        padding: 2rem;
+        grid-template-rows: 4rem 1fr;
+        width: 104%;
     }
 
     .reply article {
        margin-left: auto;
     }
-    .aside {
 
+    .reply aside {
+        width: 4rem;
+        display: flex;
+        flex-direction: column;
+        order: 1;
+        grid-area: aside;
     }
-    .AddComment {
-        width: 60rem;
+
+    .reply .text {
+        grid-area: text;
+    }
+
+    .reply nav {
+        grid-area: nav;
+    }
+    
+    .Replies .AddComment {
+        width: 104%;
     }
 }

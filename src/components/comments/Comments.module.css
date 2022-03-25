@@ -1,8 +1,11 @@
 .Comments {
-width: 97%;
+/* width: 97%; */
 margin: 0 auto;
 font-size: 1.8rem;
 padding: 1rem 0;
+background-color: hsl(223, 19%, 93%);
+width: 100%;
+min-height: 100vh;
 }
 /* Large screen  */
 

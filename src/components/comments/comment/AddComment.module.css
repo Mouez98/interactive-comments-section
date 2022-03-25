@@ -21,6 +21,11 @@ form .formContainer img {
     outline: none;
 }
 
+.AddComment form textarea:hover {
+    border: 1px solid #607d8b;
+    cursor: pointer;
+}
+
 button[type='submit'] {
     padding: 1.6rem 2.7rem;
     border-radius: 0.6rem;
@@ -30,6 +35,12 @@ button[type='submit'] {
     background-color: #5357b6;
     text-transform: uppercase;
     margin-left: auto;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+button[type='submit']:hover {
+    opacity: .5;
 }
 
 @media (min-width: 650px) {

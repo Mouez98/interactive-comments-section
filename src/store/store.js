@@ -9,7 +9,7 @@ const initialState = {
   currentUser: {
     image: currentUserImage,
     username: "juliusomo",
-    id: "u1",
+    id: 4 ,
   },
   comments: [
     {
