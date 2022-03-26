@@ -9,7 +9,7 @@ const initialState = {
   currentUser: {
     image: currentUserImage,
     username: "juliusomo",
-    id: 4 ,
+    id: 4,
   },
   comments: [
     {
@@ -22,6 +22,22 @@ const initialState = {
       user: {
         image: amyrobson,
         username: "amyrobson",
+      },
+      replies: {
+        comments: [],
+        votes: [],
+      },
+    },
+    {
+      id: 4,
+      content:
+        "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
+      createdAt: "2 month ago",
+      score: 20,
+      showReplies: false,
+      user: {
+        image: currentUserImage,
+        username: "juliusomo",
       },
       replies: {
         comments: [],
@@ -47,12 +63,12 @@ const initialState = {
               "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
             createdAt: "1 week ago",
             score: 4,
-            replyingTo: "maxblagun",
+            replyingTo: "@maxblagun",
             user: {
               image: ramsesmiron,
               username: "ramsesmiron",
             },
-            votes : []
+            votes: [],
           },
           {
             id: 4,
@@ -60,12 +76,12 @@ const initialState = {
               "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
             createdAt: "2 days ago",
             score: 2,
-            replyingTo: "ramsesmiron",
+            replyingTo: "@ramsesmiron",
             user: {
               image: currentUserImage,
               username: "juliusomo",
             },
-            votes: []
+            votes: [],
           },
         ],
         votes: [],
@@ -117,7 +133,33 @@ const commentsSlice = createSlice({
         votes.splice(likeIndex, 1);
       }
     },
-  },
+    removeComment : (state, action) => {
+      const commentIndex = state.comments.findIndex(
+        (comment) => comment.id === action.payload
+      );
+      let comments = state.comments
+      comments.splice(commentIndex, 1)
+    },
+  editComment : (state, action) => {
+    
+    console.log(action.payload);
+    const commentIndex = state.comments.findIndex(
+    (comment) => comment.id === action.payload.commentId
+  );
+    let comments = state.comments;
+
+    if(action.payload.type === 'comment'){
+    comments[commentIndex].content = action.payload.updatedText
+    }
+
+    if(action.payload.type === 'reply') {
+      const replyIndex = comments[commentIndex].replies.comments.findIndex(reply => reply.id === action.payload.replyId)
+      comments[commentIndex].replies.comments[replyIndex].content = action.payload.updatedText
+    }
+
+   
+  }
+  }
 });
 
 const store = configureStore({

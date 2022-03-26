@@ -1,31 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import styles from "./AddComment.module.css";
 import { useDispatch } from "react-redux";
 import { commentsActions } from "../../../store/store";
 import Avatar from "./avatar/Avatar";
+import Button from "../../ui/Button";
 
 const AddComment = ({ image, username, type, id, user }) => {
-  // const [comment, setComment] = useState("");
-
-  const commentRef = useRef()
+  const [comment, setComment] = useState("");
   
   const dispatch = useDispatch()
 
-  // const onChangeHandler = (e) =/> setComment(e.target.value)
+  const onChangeHandler = (e) => setComment(e.target.value)
 
   const onSubmitHandler =  (e) => {
     e.preventDefault();
-    const comment = commentRef.current.value
     if (!comment || comment.trim.length === "") {
-      commentRef.focus()
       return;
     }
     type === 'comment' &&
     dispatch(commentsActions.addComment({
       id: new Date().getTime(),
       content: comment ,
-      createdAt: new Date().getDate(),
+      createdAt: new Date().getTime()+ 5 - new Date().getTime(),
       score: 0,
       user: {
         image,
@@ -44,7 +41,7 @@ const AddComment = ({ image, username, type, id, user }) => {
          username
        }
     }))
-    // setComment('')
+    setComment('')
   };
 
   return (
@@ -52,15 +49,16 @@ const AddComment = ({ image, username, type, id, user }) => {
       <form onSubmit={onSubmitHandler}>
         <div className={styles.formContainer}>
           <textarea
-            
+            onChange={onChangeHandler}
             type="text"
             id="addComment"
             placeholder="Add a comment..."
-           
-            ref={commentRef}
+           value={comment}
           />
           <Avatar img={image} user={username} />
-          <button type="submit">Send</button>
+          <Button type='submit'>
+            Send
+          </Button>
         </div>
       </form>
     </article>
