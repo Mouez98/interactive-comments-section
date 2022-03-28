@@ -11,8 +11,6 @@ const Comment = ({ user, content, createdAt, score, currentUser, replies, id, sh
 }) => {
   const [isEdit, setIsEdit] = useState(false);
 
-
-  console.log(isEdit);
   const editHandler = () => setIsEdit(!isEdit);
 
   return (

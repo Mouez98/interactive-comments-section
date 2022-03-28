@@ -172,6 +172,7 @@ aside button svg:hover path {
     flex-direction: column;
     order: 1;
     grid-area: aside;
+    height: 11rem;
   }
 
   .reply .text {

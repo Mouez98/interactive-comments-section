@@ -22,7 +22,7 @@ const AddComment = ({ image, username, type, id, user }) => {
     dispatch(commentsActions.addComment({
       id: new Date().getTime(),
       content: comment ,
-      createdAt: new Date().getTime()+ 5 - new Date().getTime(),
+      createdAt: new Date().getTime() ,
       score: 0,
       user: {
         image,

@@ -12,7 +12,6 @@ const EditTextForm = (props) => {
     const [updatedText, setUpdatedText] = useState((props.replyingTo ? props.replyingTo : '') + props.content);
 
     const dispatch = useDispatch()
-    console.log(props.replyingTo)
 
     const onChangeHandler = (e) => setUpdatedText(e.target.value)
 
