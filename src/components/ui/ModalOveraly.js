@@ -12,8 +12,8 @@ export const Overlay = (props) => {
         comment and can't undone.
       </p>
       <div className={styles.btnContainer}>
-        <button className={styles.success}>no, cancel</button>
-        <button className={styles.danger}>yes, delete</button>
+        <button className={styles.success} onClick={props.onClose}>no, cancel</button>
+        <button className={styles.danger} onClick={props.onDelete}>yes, delete</button>
       </div>
     </div>
   );
@@ -27,7 +27,7 @@ const Backdrop = (props) => {
   return (
     <>
       {ReactDOM.createPortal(<Modal />, document.getElementById("modal"))}
-      {ReactDOM.createPortal(<Overlay />, document.getElementById("overlay"))}
+      {ReactDOM.createPortal(<Overlay onDelete={props.onDelete} onClose={props.onClose}/>, document.getElementById("overlay"))}
     </>
   );
 };

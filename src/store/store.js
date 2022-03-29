@@ -23,8 +23,8 @@ const initialState = {
         image: amyrobson,
         username: "amyrobson",
       },
-      replies: {
-        comments: [],
+      comments: {
+        replies: [],
         votes: [],
       },
     },
@@ -39,8 +39,8 @@ const initialState = {
         image: currentUserImage,
         username: "juliusomo",
       },
-      replies: {
-        comments: [],
+      comments: {
+        replies: [],
         votes: [],
       },
     },
@@ -55,8 +55,8 @@ const initialState = {
         image: maxblagun,
         username: "maxblagun",
       },
-      replies: {
-        comments: [
+      comments: {
+        replies: [
           {
             id: 3,
             content:
@@ -95,17 +95,17 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     addComment: (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.comments = [...state.comments, action.payload];
     },
     addReply: (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
 
       const commentIndex = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );
       const comment = state.comments[commentIndex];
-      comment.replies.comments.push(action.payload);
+      comment.comments.replies.push(action.payload);
     },
     showReplies: (state, action) => {
       const commentIndex = state.comments.findIndex(
@@ -122,7 +122,7 @@ const commentsSlice = createSlice({
 
       let comment = state.comments[commentIndex];
       let score = comment.score;
-      let votes = comment.replies.votes;
+      let votes = comment.comments.votes;
 
       const likeIndex = votes.findIndex((id) => id === curUserId);
 
@@ -136,33 +136,42 @@ const commentsSlice = createSlice({
         votes.splice(likeIndex, 1);
       }
     },
-    removeComment : (state, action) => {
+    removeComment: (state, action) => {
+      //To delete comment
+      console.log(action.payload)
       const commentIndex = state.comments.findIndex(
-        (comment) => comment.id === action.payload
+        (comment) => comment.id === action.payload.commentId
       );
-      let comments = state.comments
-      comments.splice(commentIndex, 1)
+      let comments = state.comments;
+      comments.splice(commentIndex, 1);
+      //To delete reply
+      if (action.payload.replyId) {
+        let replies = comments[commentIndex].replies;
+        let replyIndex = replies.comments.findIndex(
+          (reply) => reply.id === action.payload.replyId
+        );
+        replies.splice(replyIndex, 1);
+      }
     },
-  editComment : (state, action) => {
-    
-    console.log(action.payload);
-    const commentIndex = state.comments.findIndex(
-    (comment) => comment.id === action.payload.commentId
-  );
-    let comments = state.comments;
+    editComment: (state, action) => {
+      const commentIndex = state.comments.findIndex(
+        (comment) => comment.id === action.payload.commentId
+      );
+      let comments = state.comments;
 
-    if(action.payload.type === 'comment'){
-    comments[commentIndex].content = action.payload.updatedText
-    }
+      if (action.payload.type === "comment") {
+        comments[commentIndex].content = action.payload.updatedText;
+      }
 
-    if(action.payload.type === 'reply') {
-      const replyIndex = comments[commentIndex].replies.comments.findIndex(reply => reply.id === action.payload.replyId)
-      comments[commentIndex].replies.comments[replyIndex].content = action.payload.updatedText
-    }
-
-   
-  }
-  }
+      if (action.payload.type === "reply") {
+        const replyIndex = comments[commentIndex].comments.replies.findIndex(
+          (reply) => reply.id === action.payload.replyId
+        );
+        comments[commentIndex].comments.replies[replyIndex].content =
+          action.payload.updatedText;
+      }
+    },
+  },
 });
 
 const store = configureStore({

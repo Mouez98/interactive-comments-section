@@ -7,7 +7,7 @@ import Replies from "../replies/Replies";
 import styles from "./Comment.module.css";
 import EditTextForm from "./textContent/EditTextForm";
 
-const Comment = ({ user, content, createdAt, score, currentUser, replies, id, showReplies,
+const Comment = ({ user, content, createdAt, score, currentUser, comments, id, showReplies,
 }) => {
   const [isEdit, setIsEdit] = useState(false);
 
@@ -41,7 +41,7 @@ const Comment = ({ user, content, createdAt, score, currentUser, replies, id, sh
       {showReplies && (
         <Replies
           showReplies={showReplies}
-          replies={replies}
+          replies={comments.replies}
           currentUser={currentUser}
           id={id}
           user={user}

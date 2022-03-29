@@ -49,7 +49,8 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler }) => {
       <BtnsContainer
         user={user}
         currentUser={currentUser}
-        id={commentId}
+        commentId={commentId}
+        replyId={null}
         editHandler={editHandler}
       />
     </nav>
