@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
-import styles from "./AddComment.module.css";
 import { useDispatch } from "react-redux";
 import { commentsActions } from "../../../store/commets";
+
 import Avatar from "./avatar/Avatar";
 import Button from "../../ui/Button";
+import styles from "./AddComment.module.css";
 
 const AddComment = ({ image, username, type, id, user }) => {
   const [comment, setComment] = useState("");
-  
   const dispatch = useDispatch()
 
   const onChangeHandler = (e) => setComment(e.target.value)
@@ -28,7 +28,11 @@ const AddComment = ({ image, username, type, id, user }) => {
         image,
         username
       },
-      replies: []
+      comments: {
+        votes: [],
+        replies: []
+      }
+      
     }))
 
     type === 'reply' && dispatch(commentsActions.addReply({
@@ -40,7 +44,11 @@ const AddComment = ({ image, username, type, id, user }) => {
        user:{
          image,
          username
-       }
+       },
+       replies: {
+        votes: [],
+        comments: []
+      }
     }))
     setComment('')
   };

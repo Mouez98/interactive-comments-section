@@ -11,7 +11,7 @@
 .overlay {
     background-color: rgb(255, 255, 255);
     font-family: inherit;
-    padding: 1rem 1.5rem;
+    padding: 2rem ;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -23,7 +23,7 @@
 }
 
 .overlay h2 {
-    margin: 1rem 0;
+    margin: 1rem 0 1.5rem;
     color: hsl(212, 24%, 26%);
     font-size: 2rem;
 }
@@ -31,7 +31,7 @@
 .overlay p {
     line-height: 1.7rem;
     color: hsl(211, 10%, 45%);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 

@@ -9,13 +9,7 @@ import edit from "../../../../asset/images/icon-edit.svg";
 import btnDelete from "../../../../asset/images/icon-delete.svg";
 import styles from "../Comment.module.css";
 
-const BtnsContainer = ({
-  user,
-  currentUser,
-  commentId,
-  editHandler,
-  replyId,
-}) => {
+const BtnsContainer = ({ user, currentUser, commentId, editHandler, replyId }) => {
   const [deleteComment, setDeleteComment] = useState(false);
   const dispatch = useDispatch();
 
@@ -24,16 +18,14 @@ const BtnsContainer = ({
     setDeleteComment(!deleteComment);
   };
 
-  const onDeleteHandler = replyId ? {replyId, commentId, type: 'reply'} : {commentId, type:'comment'}
-  
+  const onDeleteHandler = replyId
+    ? { replyId, commentId, type: "reply" }
+    : { commentId, type: "comment" };
 
   return (
     <>
       {deleteComment && (
-        <ModalOverlay
-          onClose={alertHandler}
-          onDelete={onDeleteHandler}
-        />
+        <ModalOverlay onClose={alertHandler} onDelete={onDeleteHandler} />
       )}
       <div className={styles.btnsContainer}>
         {user.username === currentUser.username && (

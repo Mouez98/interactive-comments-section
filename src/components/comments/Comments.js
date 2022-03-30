@@ -8,6 +8,7 @@ import styles from "./Comments.module.css";
 
 const Comments = () => {
   const { currentUser, comments } = useSelector(state => state);  
+ 
   const orderedComments = [...comments].sort((a,b) => a.score - b.score).reverse()
   return (
     <main className={styles.Comments}>

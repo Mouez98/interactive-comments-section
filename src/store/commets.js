@@ -5,6 +5,12 @@ import amyrobson from "../asset/images/avatars/image-amyrobson.png";
 import maxblagun from "../asset/images/avatars/image-maxblagun.png";
 import ramsesmiron from "../asset/images/avatars/image-ramsesmiron.png";
 
+//Add local storage
+const stateHelper = {
+    currentUser : {},
+    comments: []
+}
+
 const initialState = {
   currentUser: {
     image: currentUserImage,
@@ -68,7 +74,11 @@ const initialState = {
               image: ramsesmiron,
               username: "ramsesmiron",
             },
-            votes: [],
+            replies: {
+              votes: [],
+              comments: []
+            }
+            
           },
           {
             id: 4,
@@ -81,7 +91,10 @@ const initialState = {
               image: currentUserImage,
               username: "juliusomo",
             },
-            votes: [],
+            replies: {
+              votes: [],
+              comments: []
+            }
           },
         ],
         votes: [],
@@ -95,7 +108,7 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     addComment: (state, action) => {
-      state.comments = [...state.comments, action.payload];
+      state.comments = [...state.comments, action.payload.commentId];
     },
     addReply: (state, action) => {
 
@@ -123,7 +136,7 @@ const commentsSlice = createSlice({
       let votes = comment.comments.votes;
 
       const likeIndex = votes.findIndex((id) => id === curUserId);
-
+      
       if (!votes.includes(curUserId) && type === "plus") {
         votes.push(curUserId);
         score = ++comment.score;
@@ -153,8 +166,7 @@ const commentsSlice = createSlice({
         );
 
         comments[commentIndex].comments.replies.splice(replyIndex, 1);
-      //  action.payload.replyId && state.comments[commentIndex].comments.replies.splice(replyIndex, 1)
-      // }
+      
     }
     ,
     editComment: (state, action) => {

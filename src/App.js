@@ -1,13 +1,15 @@
-import {Routes, Route} from 'react-router-dom'
+// import {Routes, Route} from 'react-router-dom'
 import './App.css';
-import Replies from './components/comments/replies/Replies';
-import Comments from './pages/Comments';
+// import Replies from './components/comments/replies/Replies';
+import Comments from './components/comments/Comments';
 
 
 function App() {
   return (
     <div className="App">
-      {/* <Comments /> */}
+       <Comments /> 
+       {/*
+       // Add It Later //
        <Routes>
          <Route path='/' element={<Comments />} />
          <Route path='*' element={<p>Not found</p>} />
@@ -17,7 +19,7 @@ function App() {
            </Route>
            <Route path='add' element={<p>add</p>} />
          </Route>
-       </Routes>
+       </Routes> */}
     </div>
   );
 }

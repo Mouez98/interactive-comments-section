@@ -1,11 +1,11 @@
-import React from "react";
+// import React from "react";
 
-import AddComment from '../components/comments/comment/AddComment'
+// import AddComment from '../components/comments/comment/AddComment'
 
-const AddCommentP = () => {
-    return(
-        <AddComment />
-    )
-}
+// const AddCommentP = () => {
+//     return(
+//         <AddComment />
+//     )
+// }
 
-export default AddCommentP
+// export default AddCommentP

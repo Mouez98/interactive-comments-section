@@ -5,10 +5,13 @@ import TextContent from "../comment/textContent/TextContent";
 import Aside from "../comment/aside/Aside";
 import styles from "../comment/Comment.module.css";
 import EditTextForm from "../comment/textContent/EditTextForm";
+import AddComment from "../comment/AddComment";
 
 const Reply = ({ edit, editHandler, user, content, score, replyingTo, createdAt, currentUser, commentId, id
 }) => {
+  console.log(currentUser.username === user.username);
     return (
+      <>
     <article className={styles.reply}>
       <Nav
         currentUser={currentUser}
@@ -21,6 +24,8 @@ const Reply = ({ edit, editHandler, user, content, score, replyingTo, createdAt,
      {edit && currentUser.id === id ? <EditTextForm type='reply' editHandler={editHandler} content={content} commentId={commentId} replyingTo={replyingTo} replyId={id}/>:  <TextContent content={content} replyingTo={replyingTo}/>} 
       <Aside score={score}  curUserId={currentUser.id} authorId={id}/>
     </article>
+      {currentUser.username !== user.username && <AddComment {...currentUser} user={user} type='test'/> }
+      </>
   );
 };
 
