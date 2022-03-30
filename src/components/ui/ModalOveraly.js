@@ -1,9 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import { useDispatch } from "react-redux";
+import { commentsActions } from "../../store/commets";
+
 import styles from "./ModalOverlay.module.css";
 
 export const Overlay = (props) => {
+  const dispatch = useDispatch()
+  const onDeleteHandler = () => {
+    props.onDelete.type === 'comment' && dispatch(commentsActions.removeComment(props.onDelete.commentId))
+    props.onDelete.type === 'reply' && dispatch(commentsActions.removeReply(props.onDelete))
+  }
   return (
     <div className={styles.overlay}>
       <h2>Delete comment</h2>
@@ -13,20 +21,20 @@ export const Overlay = (props) => {
       </p>
       <div className={styles.btnContainer}>
         <button className={styles.success} onClick={props.onClose}>no, cancel</button>
-        <button className={styles.danger} onClick={props.onDelete}>yes, delete</button>
+        <button className={styles.danger} onClick={onDeleteHandler}>yes, delete</button>
       </div>
     </div>
   );
 };
 
 export const Modal = (props) => {
-  return <div className={styles.modal}></div>;
+  return <div className={styles.modal} onClick={props.onClose}></div>;
 };
 
 const Backdrop = (props) => {
   return (
     <>
-      {ReactDOM.createPortal(<Modal />, document.getElementById("modal"))}
+      {ReactDOM.createPortal(<Modal onClose={props.onClose} />, document.getElementById("modal"))}
       {ReactDOM.createPortal(<Overlay onDelete={props.onDelete} onClose={props.onClose}/>, document.getElementById("overlay"))}
     </>
   );

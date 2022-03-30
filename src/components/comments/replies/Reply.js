@@ -15,6 +15,7 @@ const Reply = ({ edit, editHandler, user, content, score, replyingTo, createdAt,
         user={user}
         createdAt={createdAt}
         commentId={commentId}
+        replyId={id}
         editHandler={editHandler}
       />
      {edit && currentUser.id === id ? <EditTextForm type='reply' editHandler={editHandler} content={content} commentId={commentId} replyingTo={replyingTo} replyId={id}/>:  <TextContent content={content} replyingTo={replyingTo}/>} 

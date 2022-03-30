@@ -33,6 +33,7 @@ article nav {
   padding: 0rem 0.6rem;
   font-size: 1.5rem;
   border-radius: 3px;
+  margin-left: .5rem;
 }
 .btnsContainer {
   position: absolute;
@@ -64,6 +65,7 @@ article .text span {
   color: #5357b6;
   cursor: pointer;
 }
+
 aside {
   width: 10rem;
   display: flex;

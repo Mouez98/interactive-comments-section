@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import { useDispatch } from 'react-redux';
-import { commentsActions } from '../../../../store/store';
+import { commentsActions } from '../../../../store/commets';
 
 import Button from '../../../ui/Button';
 

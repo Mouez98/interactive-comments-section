@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { commentsActions } from "../../../../store/store";
+import { commentsActions } from "../../../../store/commets";
 import ModalOverlay from "../../../ui/ModalOveraly";
 
 import reply from "../../../../asset/images/icon-reply.svg";
@@ -20,23 +20,19 @@ const BtnsContainer = ({
   const dispatch = useDispatch();
 
   const replyHandler = () => dispatch(commentsActions.showReplies(commentId));
-  const removeCommentHandler = () => {
+  const alertHandler = () => {
     setDeleteComment(!deleteComment);
   };
+
+  const onDeleteHandler = replyId ? {replyId, commentId, type: 'reply'} : {commentId, type:'comment'}
+  
 
   return (
     <>
       {deleteComment && (
         <ModalOverlay
-          onClose={removeCommentHandler}
-          onDelete={() =>
-            dispatch(
-              commentsActions.removeComment({
-                commentId,
-                replyId,
-              })
-            )
-          }
+          onClose={alertHandler}
+          onDelete={onDeleteHandler}
         />
       )}
       <div className={styles.btnsContainer}>
@@ -44,7 +40,7 @@ const BtnsContainer = ({
           <>
             <button
               style={{ color: "hsl(358, 79%, 66%)" }}
-              onClick={removeCommentHandler}
+              onClick={alertHandler}
             >
               <img src={btnDelete} alt="delete" /> delete
             </button>

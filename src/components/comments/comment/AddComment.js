@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import styles from "./AddComment.module.css";
 import { useDispatch } from "react-redux";
-import { commentsActions } from "../../../store/store";
+import { commentsActions } from "../../../store/commets";
 import Avatar from "./avatar/Avatar";
 import Button from "../../ui/Button";
 
@@ -34,6 +34,7 @@ const AddComment = ({ image, username, type, id, user }) => {
     type === 'reply' && dispatch(commentsActions.addReply({
        id: id,
        content: comment,
+       createdAt: new Date().getTime() ,
        score: 0,
        replyingTo: user.username,
        user:{
