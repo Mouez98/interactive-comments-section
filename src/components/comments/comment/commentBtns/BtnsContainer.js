@@ -13,7 +13,7 @@ const BtnsContainer = ({ user, currentUser, commentId, editHandler, replyId }) =
   const [deleteComment, setDeleteComment] = useState(false);
   const dispatch = useDispatch();
 
-  const replyHandler = () => dispatch(commentsActions.showReplies(commentId));
+  const replyHandler = () => dispatch(commentsActions.showReplies({commentId, replyId}));
   const alertHandler = () => {
     setDeleteComment(!deleteComment);
   };

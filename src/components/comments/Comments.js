@@ -10,6 +10,8 @@ const Comments = () => {
   const { currentUser, comments } = useSelector(state => state);  
  
   const orderedComments = [...comments].sort((a,b) => a.score - b.score).reverse()
+  
+  console.log(orderedComments);
   return (
     <main className={styles.Comments}>
       {comments &&

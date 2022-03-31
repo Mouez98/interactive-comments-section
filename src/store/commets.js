@@ -5,11 +5,6 @@ import amyrobson from "../asset/images/avatars/image-amyrobson.png";
 import maxblagun from "../asset/images/avatars/image-maxblagun.png";
 import ramsesmiron from "../asset/images/avatars/image-ramsesmiron.png";
 
-//Add local storage
-const stateHelper = {
-    currentUser : {},
-    comments: []
-}
 
 const initialState = {
   currentUser: {
@@ -35,22 +30,6 @@ const initialState = {
       },
     },
     {
-      id: 4,
-      content:
-        "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-      createdAt: 1640991600000,
-      score: 20,
-      showReplies: false,
-      user: {
-        image: currentUserImage,
-        username: "juliusomo",
-      },
-      comments: {
-        replies: [],
-        votes: [],
-      },
-    },
-    {
       id: 2,
       content:
         "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
@@ -69,6 +48,7 @@ const initialState = {
               "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
             createdAt: 1648249200000,
             score: 4,
+            showReply: false,
             replyingTo: "@maxblagun",
             user: {
               image: ramsesmiron,
@@ -85,6 +65,7 @@ const initialState = {
             content:
               "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
             createdAt: 1648422000000,
+            showReply: false,
             score: 2,
             replyingTo: "@ramsesmiron",
             user: {
@@ -103,15 +84,16 @@ const initialState = {
   ],
 };
 
+
 const commentsSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    addComment: (state, action) => {
-      state.comments = [...state.comments, action.payload.commentId];
+    addComment: (state, action) => { 
+      console.log(action.payload);
+      state.comments = [...state.comments, action.payload];
     },
     addReply: (state, action) => {
-
       const commentIndex = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );
@@ -120,10 +102,16 @@ const commentsSlice = createSlice({
     },
     showReplies: (state, action) => {
       const commentIndex = state.comments.findIndex(
-        (comment) => comment.id === action.payload
+        (comment) => comment.id === action.payload.commentId
       );
       let comment = state.comments[commentIndex];
-      comment.showReplies = !comment.showReplies;
+     if(!action.payload.replyId){
+      comment.showReplies = !comment.showReplies; 
+    } 
+    if(action.payload.replyId){
+      const replyIndex = state.comments[commentIndex].comments.replies.findIndex(reply => reply.id === action.payload.replyId)
+      state.comments[commentIndex].comments.replies[replyIndex].showReply = !state.comments[commentIndex].comments.replies[replyIndex].showReply
+    }
     },
     addScore: (state, action) => {
       const { curUserId, authorId, type } = action.payload;

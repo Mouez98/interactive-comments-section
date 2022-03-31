@@ -40,6 +40,7 @@ const AddComment = ({ image, username, type, id, user }) => {
        content: comment,
        createdAt: new Date().getTime() ,
        score: 0,
+       showReply: false,
        replyingTo: user.username,
        user:{
          image,
