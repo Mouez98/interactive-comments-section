@@ -90,7 +90,6 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {
     addComment: (state, action) => { 
-      console.log(action.payload);
       state.comments = [...state.comments, action.payload];
     },
     addReply: (state, action) => {

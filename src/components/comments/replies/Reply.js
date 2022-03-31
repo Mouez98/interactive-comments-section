@@ -9,7 +9,6 @@ import AddComment from "../comment/AddComment";
 
 const Reply = ({showReply, edit, editHandler, user, content, score, replyingTo, createdAt, currentUser, commentId, id
 }) => {
-  console.log(currentUser.username === user.username);
     return (
       <>
     <article className={styles.reply}>
