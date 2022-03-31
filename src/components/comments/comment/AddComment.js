@@ -60,7 +60,6 @@ const AddComment = ({ image, username, type, id, user }) => {
         <div className={styles.formContainer}>
           <textarea
             onChange={onChangeHandler}
-            type="text"
             id="addComment"
             placeholder="Add a comment..."
            value={comment}
