@@ -8,7 +8,7 @@
   font-size: 1.5rem;
 }
 
-article nav {
+article header {
   margin: 1rem 0;
 }
 .user {
@@ -40,7 +40,7 @@ article nav {
   bottom: 1.7rem;
   right: 1.5rem;
 }
-article nav button {
+article header button {
   border: none;
   background-color: transparent;
   color: #5357b6;
@@ -51,7 +51,7 @@ article nav button {
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
-nav button:hover {
+header button:hover {
   opacity: 0.5;
 }
 article .text {
@@ -136,7 +136,7 @@ aside button svg:hover path {
     height: 11rem;
   }
 
-  article nav {
+  article header {
     margin: 1rem 0;
     display: flex;
     align-items: center;
@@ -181,7 +181,7 @@ aside button svg:hover path {
     grid-area: text;
   }
 
-  .reply nav {
+  .reply header {
     grid-area: nav;
   }
 

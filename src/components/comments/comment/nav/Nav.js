@@ -40,7 +40,7 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) 
   // }, [createdAtHandler]);
 
   return (
-    <nav>
+    <header>
       <User
         currentUser={currentUser}
         createdAt={createdAt}
@@ -53,7 +53,7 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) 
         replyId={replyId}
         editHandler={editHandler}
       />
-    </nav>
+    </header>
   );
 };
 

@@ -15,7 +15,7 @@ const AddComment = ({ image, username, type, id, user }) => {
 
   const onSubmitHandler =  (e) => {
     e.preventDefault();
-    if (!comment || comment.trim.length === "") {
+    if (!comment || comment.trim().length === 0) {
       return;
     }
     type === 'comment' &&
