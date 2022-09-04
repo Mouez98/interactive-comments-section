@@ -1,30 +1,39 @@
-import React from "react";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectReplyById } from '../../../store/repliesSlice';
 
-import Nav from "../comment/nav/Nav";
-import TextContent from "../comment/textContent/TextContent";
-import Aside from "../comment/aside/Aside";
-import styles from "../comment/Comment.module.css";
-import EditTextForm from "../comment/textContent/EditTextForm";
-import AddComment from "../comment/AddComment";
+import Nav from '../comment/Nav';
+import TextContent from '../comment/TextContent';
+import Aside from '../comment/Aside';
+import styles from '../comment/Comment.module.css';
+import EditTextForm from '../comment/EditTextForm';
+import AddComment from '../comment/AddComment';
 
-const Reply = ({showReply, edit, editHandler, user, content, score, replyingTo, createdAt, currentUser, commentId, id
-}) => {
-    return (
-      <>
-    <article className={styles.reply}>
-      <Nav
-        currentUser={currentUser}
-        user={user}
-        createdAt={createdAt}
-        commentId={commentId}
-        replyId={id}
-        editHandler={editHandler}
-      />
-     {edit && currentUser.id === id ? <EditTextForm type='reply' editHandler={editHandler} content={content} commentId={commentId} replyingTo={replyingTo} replyId={id}/>:  <TextContent content={content} replyingTo={replyingTo}/>} 
-      <Aside score={score}  curUserId={currentUser.id} authorId={id}/>
-    </article>
-      {(currentUser.username !== user.username) && showReply && <AddComment {...currentUser} user={user} type='reply' id={commentId}/> }
-      </>
+const Reply =  ({ edit, editHandler, currentUser, id,content, user, score, createdAt, replyingTo, showReply, commentId}) => {
+  return (
+    <>
+      <article className={styles.reply}>
+        <Nav
+         id={id} user={user} createdAt={createdAt}
+        />
+        {edit && currentUser.id === id ? (
+          <EditTextForm
+            type="reply"
+            editHandler={editHandler}
+            content={content}
+            commentId={commentId}
+            replyingTo={replyingTo}
+            replyId={id}
+          />
+        ) : (
+          <TextContent content={content} replyingTo={replyingTo} />
+        )}
+        <Aside score={score} curUserId={1} authorId={id} />
+      </article>
+      { showReply && (
+        <AddComment  user={user} type="reply" commentId={commentId} id={id}/>
+      )}
+    </>
   );
 };
 

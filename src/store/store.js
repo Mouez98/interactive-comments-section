@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { commentsReducer } from "./commets";
+import { commentsReducer } from "./commentsSlice";
+import { repliesReducer } from "./repliesSlice";
+import { usersReducer } from "./usersSlice";
 
 const store = configureStore({
-  reducer: commentsReducer,
+  reducer: {comments: commentsReducer, users: usersReducer, replies: repliesReducer}
 });
 
 

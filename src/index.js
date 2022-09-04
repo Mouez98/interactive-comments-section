@@ -5,6 +5,11 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 import { Provider } from "react-redux";
+import {commentsActions} from './store/commentsSlice'
+import {repliesActions} from './store/repliesSlice'
+
+store.dispatch(repliesActions.addReplies())
+store.dispatch(commentsActions.addComments())
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
+import  {formatDistanceToNow} from 'date-fns'
 
-import Avatar from "../avatar/Avatar";
-import styles from "../Comment.module.css";
-
+import Avatar from "./Avatar";
+import styles from "./Comment.module.css";
+import {  useSelector } from "react-redux";
+import { getCurrentUser } from "../../../store/usersSlice";
 const createdAtHandler = (createdAt) => {
   let createdTime = createdAt;
   let curTime = new Date().getTime();
@@ -31,16 +33,14 @@ const createdAtHandler = (createdAt) => {
       return  createdAtValue
 };
 
-const User = ({ user, currentUser, createdAt }) => {
-  const createdAtCountUp = useState(createdAtHandler(createdAt))[0];
- 
-  useEffect(() => {
-    createdAtHandler(createdAt);
-  }, [createdAt]);
+const User = ({ id, createdAt, user }) => {
+  const currentUser = useSelector(getCurrentUser)
+
+  const createdAtCountUp = `${formatDistanceToNow(new Date(createdAt))} ago`
 
   return(
   <div className={styles.user}>
-    <Avatar img={user.image} user={user.username} />
+    <Avatar id={id} user={user}/>
     <p>
       {user.username}
       {user.username === currentUser.username ? <span>you</span> : null}

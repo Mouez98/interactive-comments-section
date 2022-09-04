@@ -1,56 +1,49 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectCommentById } from '../../../store/commentsSlice';
+import { getCurrentUser } from '../../../store/usersSlice';
 
-import Aside from "./aside/Aside";
-import Nav from "./nav/Nav";
-import TextContent from "./textContent/TextContent";
-import Replies from "../replies/Replies";
-import styles from "./Comment.module.css";
-import EditTextForm from "./textContent/EditTextForm";
+import Aside from './Aside';
+import Nav from './Nav';
+import TextContent from './TextContent';
+import Replies from '../replies/Replies';
+import styles from './Comment.module.css';
+import EditTextForm from './EditTextForm';
 
-const Comment = ({ user, content, createdAt, score, currentUser, comments, id, showReplies,
-}) => {
-  const [isEdit, setIsEdit] = useState(false);
+const Comment = ({ id }) => {
+  const [showEditForm, setShowEditForm] = useState(false);
+  const comment = useSelector((state) => selectCommentById(state, id));
+  const currentUser = useSelector(getCurrentUser);
 
-  const editHandler = () => setIsEdit(!isEdit);
+  if (!comment) {
+    return <p>No comment found!</p>;
+  }
+
+  const showEditFormHandler = () => setShowEditForm(!showEditForm);
 
   return (
     <>
       <section className={styles.Comment}>
         <article>
-          <Nav
-            currentUser={currentUser}
-            user={user}
-            createdAt={createdAt}
-            commentId={id}
-            editHandler={editHandler}
-          />
-          {isEdit && currentUser.id === id ? (
-            <EditTextForm
-              content={content}
-              id={id}
-              editHandler={editHandler}
-              type='comment'
-              commentId={id}
-            />
+          <Nav id={id} user={comment.user} createdAt={comment.createdAt} showEditForm={showEditFormHandler}/>
+          {showEditForm  ? (
+            <EditTextForm id={id} showEditForm={showEditFormHandler} type="comment" {...comment} />
           ) : (
-            <TextContent content={content} />
+            <TextContent id={id} content={comment.content} />
           )}
         </article>
-        <Aside score={score} curUserId={currentUser.id} authorId={id} />
+        <Aside id={id} score={comment.score} />
       </section>
-      {showReplies && (
+      {comment.showReplies && (
         <Replies
-          showReplies={showReplies}
-          replies={comments.replies}
           currentUser={currentUser}
           id={id}
-          user={user}
-          edit={isEdit}
-          editHandler={editHandler}
+          edit={showEditForm}
+          editHandler={showEditFormHandler}
         />
       )}
     </>
   );
 };
 
-export default Comment;
+export default React.memo(Comment);

@@ -1,9 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import {selectCommentById} from '../../../store/commentsSlice'
 
-import User from "../user/User";
-import BtnsContainer from "../commentBtns/BtnsContainer";
+import User from "./User";
+import BtnsContainer from "./BtnsContainer";
 
-const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) => {
+const Nav = ({ id, replyId, showEditForm, user, createdAt }) => {
+
+  
   // const [createdAtCountUp, setCreatedAtCountUp] = useState(createdAt);
 
   // const createdAtHandler = useCallback(() => {
@@ -41,17 +45,15 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) 
 
   return (
     <header>
-      <User
-        currentUser={currentUser}
-        createdAt={createdAt}
-        user={user}
+      <User 
+      createdAt={createdAt}
+      user={user}
+        id={id}
       />
       <BtnsContainer
+        showEditForm={showEditForm}
+        id={id}
         user={user}
-        currentUser={currentUser}
-        commentId={commentId}
-        replyId={replyId}
-        editHandler={editHandler}
       />
     </header>
   );
