@@ -1,9 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import User from "../user/User";
-import BtnsContainer from "../commentBtns/BtnsContainer";
+import User from './User';
+import BtnsContainer from './BtnsContainer';
 
-const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) => {
+const Nav = ({
+  id,
+  showEditForm,
+  user,
+  createdAt,
+  type,
+  showReplyEditFormHandler,
+}) => {
+
   // const [createdAtCountUp, setCreatedAtCountUp] = useState(createdAt);
 
   // const createdAtHandler = useCallback(() => {
@@ -11,7 +19,6 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) 
   //   let curTime = new Date().getTime();
 
   //   let uploadedTime = Math.abs(curTime - createdTime);
-
 
   //   let months = Math.floor(uploadedTime / (1000 * 60 * 60 * 24 * 30));
   //   let weeks = Math.floor(uploadedTime / (1000 * 60 * 60 * 24 * 7));
@@ -41,17 +48,14 @@ const Nav = ({ currentUser, createdAt, user, commentId, editHandler, replyId }) 
 
   return (
     <header>
-      <User
-        currentUser={currentUser}
-        createdAt={createdAt}
-        user={user}
-      />
+      <User createdAt={createdAt} user={user} id={id} />
       <BtnsContainer
+        type={type}
+        showEditForm={
+          type === 'reply' ? showReplyEditFormHandler : showEditForm
+        }
+        id={id}
         user={user}
-        currentUser={currentUser}
-        commentId={commentId}
-        replyId={replyId}
-        editHandler={editHandler}
       />
     </header>
   );
