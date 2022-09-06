@@ -1,13 +1,14 @@
 import {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { repliesActions } from '../../../store/repliesSlice';
-import { getCurrentUser } from '../../../store/usersSlice';
+import { repliesActions } from '../../store/repliesSlice';
+import { getCurrentUser } from '../../store/usersSlice';
 
-import Avatar from '../comment/Avatar';
-import Button from '../../ui/Button';
+import Avatar from '../nav/Avatar';
+import Button from '../ui/Button';
 import styles from '../comment/AddComment.module.css'
 
-const AddReplyForm = ({id,commentId}) => {
+//// do lifting id in the replies
+const AddReplyForm = ({commentId}) => {
     const currentUser = useSelector(getCurrentUser)
 
     const [reply, setReply] = useState('');
@@ -23,7 +24,6 @@ const AddReplyForm = ({id,commentId}) => {
 
         dispatch(
           repliesActions.addReply({
-            replyId: id,
             content: reply,
             score: 0,
             commentId,

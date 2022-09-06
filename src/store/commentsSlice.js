@@ -1,5 +1,6 @@
 import { createSlice, createEntityAdapter, nanoid } from '@reduxjs/toolkit';
 import { sub } from 'date-fns';
+import { addOne, addScore, removeOne, updateOne } from './helpers/helpers';
 
 import amyrobson from '../asset/images/avatars/image-amyrobson.png';
 import maxblagun from '../asset/images/avatars/image-maxblagun.png';
@@ -9,7 +10,7 @@ const COMMENTS = [
     id: 1,
     content:
       "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-    createdAt: sub(new Date(), {days: 2}).toISOString(),
+    createdAt: sub(new Date(), { days: 2 }).toISOString(),
     score: 12,
     showReplies: false,
     user: {
@@ -21,7 +22,7 @@ const COMMENTS = [
     id: 2,
     content:
       "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-    createdAt: sub(new Date(), {days: 1}).toISOString(),
+    createdAt: sub(new Date(), { days: 1 }).toISOString(),
     showReplies: false,
     score: 5,
     user: {
@@ -45,9 +46,7 @@ const commentsSlice = createSlice({
       commentsAdapter.upsertMany(state, COMMENTS);
     },
     addComment: {
-      reducer: (state, action) => {
-        commentsAdapter.addOne(state, action.payload);
-      },
+      reducer: (state, action) => addOne(state, action, commentsAdapter),
       prepare: ({ content, user }) => {
         return {
           payload: {
@@ -65,23 +64,9 @@ const commentsSlice = createSlice({
       if (excitingComment)
         excitingComment.showReplies = !excitingComment.showReplies;
     },
-    addScore: (state, action) => {
-      const { id, type } = action.payload;
-      const excitingComment = state.entities[id];
-      if (type === 'upvote' && excitingComment) {
-        excitingComment.score++;
-      } else if (type === 'downvote' && excitingComment) {
-        excitingComment.score--;
-      } else {
-        console.log('no comment found');
-      }
-    },
-    removeComment: (state, action) => {
-     commentsAdapter.removeOne(state, action.payload.id);
-    },
-    editComment: (state, action) => {
-      commentsAdapter.upsertOne(state, action.payload);
-    },
+    addScore: (state, action) => addScore(state, action),
+    removeComment: (state, action) => removeOne(state, action, commentsAdapter),
+    updateComment: (state, action) => updateOne(state, action, commentsAdapter),
   },
 });
 

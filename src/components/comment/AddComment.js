@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { commentsActions } from '../../../store/commentsSlice';
-import { getCurrentUser } from '../../../store/usersSlice';
+import { commentsActions } from '../../store/commentsSlice';
+import { getCurrentUser } from '../../store/usersSlice';
 
-import Avatar from './Avatar';
-import Button from '../../ui/Button';
+import Avatar from '../nav/Avatar';
+import Button from '../ui/Button';
 import styles from './AddComment.module.css';
 
 const AddComment = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./Comment.module.css";
+import styles from "../comment/Comment.module.css";
 
 const TextContent = ({id,content}) => (
 

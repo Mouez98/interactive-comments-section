@@ -2,9 +2,10 @@ import React from "react";
 import  {formatDistanceToNow} from 'date-fns'
 
 import Avatar from "./Avatar";
-import styles from "./Comment.module.css";
+import styles from "../comment/Comment.module.css";
 import {  useSelector } from "react-redux";
-import { getCurrentUser } from "../../../store/usersSlice";
+import { getCurrentUser } from "../../store/usersSlice";
+
 const createdAtHandler = (createdAt) => {
   let createdTime = createdAt;
   let curTime = new Date().getTime();

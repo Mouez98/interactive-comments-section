@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import currentUserImage from "../asset/images/avatars/image-juliusomo.png";
 
+
 const initialState = {
     currentUser: {
         image: currentUserImage,

@@ -1,20 +1,24 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { commentsActions, selectCommentById } from "../../../store/commentsSlice";
+import { useDispatch } from "react-redux";
+import { commentsActions } from "../../store/commentsSlice";
+import { repliesActions } from "../../store/repliesSlice";
+
 // import { getCurrentUser} from "../../../../store/usersSlice";
 
-const Aside = ({ id, score }) => {
+const Aside = ({ id, score, type  }) => {
   const dispatch = useDispatch();
 
-
-  const scoreHandler = (type) => {
-    dispatch(
-      commentsActions.addScore({
-        id,
-        type,
-      })
-    );
+  const scoreHandler = (actionType) => {
+    switch(type) {
+      case 'comment' : dispatch(commentsActions.addScore({ id, actionType })) ;
+      break;
+      case 'reply': 
+      dispatch(repliesActions.addScore({ id, actionType }))
+      console.log(type);
+      break;
+      default: console.log(type)
+    }
   };
   return (
     <aside>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { selectCommentById } from '../../../store/commentsSlice';
-import { getCurrentUser } from '../../../store/usersSlice';
+import { selectCommentById } from '../../store/commentsSlice';
+import { getCurrentUser } from '../../store/usersSlice';
 
-import Aside from './Aside';
-import Nav from './Nav';
-import TextContent from './TextContent';
-import Replies from '../replies/Replies';
+import Aside from '../aside/Aside';
+import Nav from '../nav/Nav';
+import TextContent from '../content/TextContent';
+import Replies from '../../features/replies/Replies';
 import styles from './Comment.module.css';
-import EditTextForm from './EditTextForm';
+import EditTextForm from '../content/EditTextForm';
 
 const Comment = ({ id }) => {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -32,13 +32,13 @@ const Comment = ({ id }) => {
             <TextContent id={id} content={comment.content} />
           )}
         </article>
-        <Aside id={id} score={comment.score} />
+        <Aside id={id} score={comment.score} type='comment' />
       </section>
       {comment.showReplies && (
-        <Replies
+        <Replies 
           currentUser={currentUser}
           id={id}
-          edit={showEditForm}
+          editShown={showEditForm}
           editHandler={showEditFormHandler}
         />
       )}

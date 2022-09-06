@@ -3,13 +3,20 @@ import ReactDOM from "react-dom";
 
 import { useDispatch } from "react-redux";
 import { commentsActions } from "../../store/commentsSlice";
+import { repliesActions } from "../../store/repliesSlice";
 
 import styles from "./ModalOverlay.module.css";
 
-export const Overlay = (props) => {
+export const Overlay = ({id, type, onClose}) => {
   const dispatch = useDispatch()
   const onDeleteHandler = () => {
-     dispatch(commentsActions.removeComment({id: props.id}))
+    switch(type) {
+      case 'reply': 
+      dispatch(repliesActions.removeReply({ id }))
+      break;
+      default: dispatch(commentsActions.removeComment({ id }))
+    }
+    //  dispatch(commentsActions.removeComment({id}))
     // props .onDelete.type === 'reply' && dispatch(commentsActions.removeReply(props.onDelete))
   }
   return (
@@ -20,7 +27,7 @@ export const Overlay = (props) => {
         comment and can't undone.
       </p>
       <div className={styles.btnContainer}>
-        <button className={styles.success} onClick={props.onClose}>no, cancel</button>
+        <button className={styles.success} onClick={onClose}>no, cancel</button>
         <button className={styles.danger} onClick={onDeleteHandler}>yes, delete</button>
       </div>
     </div>
@@ -35,7 +42,7 @@ const Backdrop = (props) => {
   return (
     <>
       {ReactDOM.createPortal(<Modal  onClose={props.onClose} />, document.getElementById("modal"))}
-      {ReactDOM.createPortal(<Overlay id={props.id} onDelete={props.onDelete} onClose={props.onClose}/>, document.getElementById("overlay"))}
+      {ReactDOM.createPortal(<Overlay type={props.type} id={props.id} onDelete={props.onDelete} onClose={props.onClose}/>, document.getElementById("overlay"))}
     </>
   );
 };

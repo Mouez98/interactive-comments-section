@@ -1,7 +1,7 @@
 // import {Routes, Route} from 'react-router-dom'
 import './App.css';
 // import Replies from './components/comments/replies/Replies';
-import Comments from './components/comments/Comments';
+import Comments from './features/comments/Comments';
 
 
 function App() {

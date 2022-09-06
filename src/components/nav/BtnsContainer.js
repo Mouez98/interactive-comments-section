@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { commentsActions, selectCommentById, showReplies } from "../../../store/commentsSlice";
-import { getCurrentUser } from "../../../store/usersSlice";
+import { commentsActions, selectCommentById, showReplies } from "../../store/commentsSlice";
+import { getCurrentUser } from "../../store/usersSlice";
 
-import ModalOverlay from "../../ui/ModalOveraly";
+import ModalOverlay from "../ui/ModalOveraly";
 
-import reply from "../../../asset/images/icon-reply.svg";
-import edit from "../../../asset/images/icon-edit.svg";
-import btnDelete from "../../../asset/images/icon-delete.svg";
-import styles from "./Comment.module.css";
+import reply from "../../asset/images/icon-reply.svg";
+import edit from "../../asset/images/icon-edit.svg";
+import btnDelete from "../../asset/images/icon-delete.svg";
+import styles from "../comment/Comment.module.css";
 
-const BtnsContainer = ({ id, replyId = 1, showEditForm }) => {
+const BtnsContainer = ({ id, showEditForm, user, type }) => {
   const currentUser = useSelector(getCurrentUser)
   const [deleteComment, setDeleteComment] = useState(false);
   const dispatch = useDispatch();
-  const comment = useSelector(state => selectCommentById(state, id))
 
   const replyHandler = () => dispatch(commentsActions.showReplies({id}));
   const alertHandler = () => {
@@ -23,17 +22,14 @@ const BtnsContainer = ({ id, replyId = 1, showEditForm }) => {
     
   };
 
-  const onDeleteHandler = replyId 
-    ? { replyId  , id, type: "reply" }
-    : { id, type: "comment" };
 
   return (
     <>
       {deleteComment && (
-        <ModalOverlay onClose={alertHandler} onDelete={onDeleteHandler} id={id}/>
+        <ModalOverlay type={type} onClose={alertHandler} id={id}/>
       )}
       <div className={styles.btnsContainer}>
-        {comment?.user?.username === currentUser?.username && (
+        {user?.username === currentUser?.username && (
           <>
             <button
               style={{ color: "hsl(358, 79%, 66%)" }}
@@ -46,7 +42,7 @@ const BtnsContainer = ({ id, replyId = 1, showEditForm }) => {
             </button>
           </>
         )}
-        {comment?.user?.username !== currentUser?.username && (
+        {user?.username !== currentUser?.username && (
           <button onClick={replyHandler}>
             <img src={reply} alt="reply" /> reply
           </button>
