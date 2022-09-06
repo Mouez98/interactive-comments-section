@@ -5,6 +5,7 @@
  * @param {* adapter} adapter
  * @returns
  */
+
 exports.addOne = (state, action, adapter) => {
   adapter.upsertOne(state, action.payload);
 };

@@ -6,6 +6,7 @@ import styles from "../comment/Comment.module.css";
 import {  useSelector } from "react-redux";
 import { getCurrentUser } from "../../store/usersSlice";
 
+// Replaced with date-fns
 const createdAtHandler = (createdAt) => {
   let createdTime = createdAt;
   let curTime = new Date().getTime();
