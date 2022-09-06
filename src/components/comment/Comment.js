@@ -25,17 +25,27 @@ const Comment = ({ id }) => {
     <>
       <section className={styles.Comment}>
         <article>
-          <Nav id={id} user={comment.user} createdAt={comment.createdAt} showEditForm={showEditFormHandler}/>
-          {showEditForm  ? (
-            <EditTextForm id={id} showEditForm={showEditFormHandler} type="comment" {...comment} />
+          <Nav
+            id={id}
+            user={comment.user}
+            createdAt={comment.createdAt}
+            showEditForm={showEditFormHandler}
+          />
+          {showEditForm ? (
+            <EditTextForm
+              id={id}
+              showEditForm={showEditFormHandler}
+              type="comment"
+              {...comment}
+            />
           ) : (
             <TextContent id={id} content={comment.content} />
           )}
         </article>
-        <Aside id={id} score={comment.score} type='comment' />
+        <Aside id={id} score={comment.score} type="comment" />
       </section>
       {comment.showReplies && (
-        <Replies 
+        <Replies
           currentUser={currentUser}
           id={id}
           editShown={showEditForm}
